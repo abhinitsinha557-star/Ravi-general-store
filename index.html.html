@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ravi General Store – Your Neighbourhood Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #1a7a4a;
+  --green-light: #27ae60;
+  --green-pale: #e8f5ed;
+  --orange: #e67e22;
+  --orange-light: #f39c12;
+  --red: #e74c3c;
+  --dark: #1a1a2e;
+  --gray: #6b7280;
+  --bg: #f9fafb;
+  --white: #ffffff;
+  --shadow: 0 4px 24px rgba(0,0,0,0.10);
+  --radius: 16px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--dark); }
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--green);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; height: 64px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+}
+.nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo { font-size: 28px; }
+.nav-name { font-family: 'Baloo 2', cursive; font-size: 1.4rem; font-weight: 800; color: #fff; letter-spacing: .5px; }
+.nav-links { display: flex; gap: 8px; align-items: center; }
+.nav-links a {
+  color: rgba(255,255,255,0.85); text-decoration: none;
+  font-weight: 600; font-size: .9rem; padding: 8px 14px; border-radius: 8px;
+  transition: background .2s, color .2s;
+}
+.nav-links a:hover { background: rgba(255,255,255,0.15); color: #fff; }
+.cart-btn {
+  background: var(--orange); color: #fff !important; border-radius: 8px !important;
+  display: flex; align-items: center; gap: 6px;
+}
+.cart-count {
+  background: #fff; color: var(--orange);
+  font-size: .75rem; font-weight: 700;
+  border-radius: 100px; padding: 1px 6px; min-width: 20px; text-align: center;
+}
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, #1a7a4a 0%, #145c38 60%, #0f4028 100%);
+  color: #fff; padding: 64px 32px 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 32px; flex-wrap: wrap;
+}
+.hero-text h1 { font-family: 'Baloo 2', cursive; font-size: 3rem; font-weight: 800; line-height: 1.1; }
+.hero-text h1 span { color: #f9ca24; }
+.hero-text p { margin: 16px 0 28px; font-size: 1.1rem; opacity: .9; max-width: 480px; }
+.hero-badges { display: flex; gap: 10px; flex-wrap: wrap; }
+.badge {
+  background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+  padding: 6px 14px; border-radius: 100px; font-size: .85rem; font-weight: 600;
+  display: flex; align-items: center; gap: 6px;
+}
+.hero-actions { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--orange); color: #fff; border: none; border-radius: 10px;
+  padding: 14px 28px; font-size: 1rem; font-weight: 700; cursor: pointer;
+  font-family: 'Nunito', sans-serif; transition: transform .15s, box-shadow .15s;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(230,126,34,.4); }
+.btn-secondary {
+  background: rgba(255,255,255,0.15); color: #fff; border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 10px; padding: 12px 24px; font-size: 1rem; font-weight: 700; cursor: pointer;
+  font-family: 'Nunito', sans-serif; transition: background .2s; text-decoration: none;
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.25); }
+.hero-art { font-size: 120px; line-height: 1; filter: drop-shadow(0 8px 24px rgba(0,0,0,.2)); }
+
+/* ── UPI BANNER ── */
+.upi-banner {
+  background: linear-gradient(90deg, #f9ca24, #f0932b);
+  padding: 14px 32px; display: flex; align-items: center; justify-content: center;
+  gap: 16px; flex-wrap: wrap;
+}
+.upi-banner p { font-weight: 700; font-size: .95rem; color: #222; }
+.upi-id {
+  background: rgba(0,0,0,0.1); border-radius: 8px; padding: 4px 12px;
+  font-family: monospace; font-size: .95rem; font-weight: 700; color: #111;
+}
+
+/* ── SECTION ── */
+section { padding: 56px 32px; }
+.section-header { text-align: center; margin-bottom: 36px; }
+.section-header h2 { font-family: 'Baloo 2', cursive; font-size: 2rem; font-weight: 800; color: var(--dark); }
+.section-header p { color: var(--gray); margin-top: 6px; font-size: 1rem; }
+.tag {
+  display: inline-block; background: var(--green-pale); color: var(--green);
+  border-radius: 100px; padding: 4px 14px; font-size: .8rem; font-weight: 700;
+  margin-bottom: 8px; letter-spacing: .5px; text-transform: uppercase;
+}
+
+/* ── CATEGORIES ── */
+.cats-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px;
+}
+.cat-card {
+  background: var(--white); border-radius: var(--radius); padding: 28px 16px;
+  text-align: center; cursor: pointer; transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06); border: 2px solid transparent;
+  text-decoration: none; color: var(--dark); display: block;
+}
+.cat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--green-light); }
+.cat-icon { font-size: 44px; margin-bottom: 10px; display: block; }
+.cat-name { font-weight: 700; font-size: .95rem; }
+.cat-count { font-size: .8rem; color: var(--gray); margin-top: 4px; }
+
+/* ── PRODUCTS ── */
+#products { background: var(--white); }
+.filter-bar {
+  display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px;
+  align-items: center; justify-content: center;
+}
+.filter-btn {
+  background: var(--bg); border: 2px solid #e5e7eb; border-radius: 100px;
+  padding: 8px 18px; font-size: .88rem; font-weight: 600; cursor: pointer;
+  font-family: 'Nunito', sans-serif; color: var(--dark); transition: all .2s;
+}
+.filter-btn.active, .filter-btn:hover {
+  background: var(--green); border-color: var(--green); color: #fff;
+}
+.search-bar {
+  flex: 1; max-width: 320px; display: flex; align-items: center;
+  background: var(--bg); border: 2px solid #e5e7eb; border-radius: 100px;
+  padding: 8px 16px; gap: 8px;
+}
+.search-bar input {
+  border: none; background: transparent; outline: none;
+  font-family: 'Nunito', sans-serif; font-size: .9rem; color: var(--dark); flex: 1;
+}
+.products-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px;
+}
+.product-card {
+  background: var(--white); border-radius: var(--radius); overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,.07); transition: transform .2s, box-shadow .2s;
+  border: 2px solid #f0f0f0;
+}
+.product-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.product-img { width: 100%; height: 140px; object-fit: cover; display: flex; align-items: center; justify-content: center; font-size: 56px; background: var(--green-pale); }
+.product-body { padding: 14px; }
+.product-name { font-weight: 700; font-size: .95rem; margin-bottom: 4px; }
+.product-unit { font-size: .8rem; color: var(--gray); }
+.product-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; }
+.product-price { font-family: 'Baloo 2', cursive; font-size: 1.15rem; font-weight: 700; color: var(--green); }
+.add-btn {
+  background: var(--green); color: #fff; border: none; border-radius: 8px;
+  padding: 7px 14px; font-size: .85rem; font-weight: 700; cursor: pointer;
+  font-family: 'Nunito', sans-serif; transition: background .2s; display: flex; align-items: center; gap: 4px;
+}
+.add-btn:hover { background: var(--green-light); }
+.add-btn.added { background: var(--orange); }
+.qty-ctrl { display: flex; align-items: center; gap: 6px; }
+.qty-ctrl button {
+  width: 28px; height: 28px; border-radius: 6px; border: none; cursor: pointer;
+  font-size: 1rem; font-weight: 700; font-family: 'Nunito', sans-serif;
+}
+.qty-minus { background: #fee2e2; color: var(--red); }
+.qty-plus { background: var(--green-pale); color: var(--green); }
+.qty-num { font-weight: 700; min-width: 20px; text-align: center; }
+.no-results { text-align: center; padding: 40px; color: var(--gray); font-size: 1rem; display: none; }
+
+/* ── HOW IT WORKS ── */
+#how { background: var(--green-pale); }
+.steps { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+.step {
+  background: var(--white); border-radius: var(--radius); padding: 28px 24px;
+  text-align: center; flex: 1; min-width: 200px; max-width: 240px; box-shadow: 0 2px 12px rgba(0,0,0,.06);
+}
+.step-num {
+  width: 44px; height: 44px; background: var(--green); color: #fff;
+  border-radius: 100%; display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 1.1rem; margin: 0 auto 14px;
+}
+.step h3 { font-weight: 700; margin-bottom: 8px; }
+.step p { font-size: .88rem; color: var(--gray); }
+
+/* ── ORDER / CART ── */
+#order { background: var(--white); }
+.order-layout { display: flex; gap: 32px; flex-wrap: wrap; }
+.order-form-wrap { flex: 1; min-width: 300px; }
+.cart-wrap { flex: 0 0 340px; min-width: 280px; }
+.form-group { margin-bottom: 18px; }
+label { display: block; font-weight: 700; font-size: .88rem; margin-bottom: 6px; color: var(--dark); }
+input, select, textarea {
+  width: 100%; padding: 12px 14px; border: 2px solid #e5e7eb; border-radius: 10px;
+  font-family: 'Nunito', sans-serif; font-size: .9rem; outline: none; transition: border-color .2s;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--green); }
+.form-row { display: flex; gap: 14px; }
+.form-row .form-group { flex: 1; }
+.cart-box {
+  background: var(--bg); border-radius: var(--radius); padding: 20px;
+  border: 2px solid #e5e7eb; position: sticky; top: 80px;
+}
+.cart-box h3 { font-family: 'Baloo 2', cursive; font-size: 1.3rem; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.cart-items { max-height: 280px; overflow-y: auto; }
+.cart-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 0; border-bottom: 1px solid #e5e7eb; font-size: .88rem;
+}
+.cart-item-name { flex: 1; font-weight: 600; }
+.cart-item-qty { color: var(--gray); }
+.cart-item-price { font-weight: 700; color: var(--green); }
+.cart-rm { background: none; border: none; color: var(--red); cursor: pointer; font-size: 1rem; padding: 2px; }
+.cart-empty { text-align: center; color: var(--gray); padding: 24px; font-size: .9rem; }
+.cart-totals { margin-top: 14px; padding-top: 14px; border-top: 2px solid #e5e7eb; }
+.cart-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: .9rem; }
+.cart-row.total { font-weight: 800; font-size: 1.05rem; color: var(--green); }
+.upi-pay-box {
+  margin-top: 14px; background: #fff8e1; border: 2px solid #f9ca24; border-radius: 10px;
+  padding: 12px; text-align: center;
+}
+.upi-pay-box p { font-size: .82rem; color: #666; }
+.upi-pay-box .upi-big { font-family: monospace; font-size: 1.05rem; font-weight: 700; color: var(--green); margin: 4px 0; }
+.place-order-btn {
+  width: 100%; margin-top: 14px; background: var(--green); color: #fff; border: none;
+  border-radius: 10px; padding: 14px; font-size: 1rem; font-weight: 700; cursor: pointer;
+  font-family: 'Nunito', sans-serif; transition: background .2s;
+}
+.place-order-btn:hover { background: var(--green-light); }
+
+/* ── MODAL ── */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5);
+  z-index: 999; align-items: center; justify-content: center;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: #fff; border-radius: 20px; padding: 40px 32px; max-width: 440px; width: 90%;
+  text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,.25); animation: popIn .3s ease;
+}
+@keyframes popIn { from { transform: scale(.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.modal-icon { font-size: 64px; margin-bottom: 16px; }
+.modal h2 { font-family: 'Baloo 2', cursive; font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; }
+.modal p { color: var(--gray); margin-bottom: 20px; line-height: 1.6; }
+.order-id { font-family: monospace; background: var(--green-pale); color: var(--green); padding: 6px 16px; border-radius: 8px; font-weight: 700; font-size: 1rem; display: inline-block; margin-bottom: 16px; }
+
+/* ── CAREERS ── */
+#careers { background: var(--dark); color: #fff; }
+#careers .section-header h2 { color: #fff; }
+#careers .section-header p { color: rgba(255,255,255,.6); }
+.jobs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.job-card {
+  background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--radius); padding: 24px;
+}
+.job-card h3 { font-weight: 700; margin-bottom: 6px; font-size: 1.05rem; }
+.job-card p { font-size: .85rem; color: rgba(255,255,255,.6); margin-bottom: 14px; }
+.job-tag { background: var(--green); border-radius: 100px; padding: 4px 12px; font-size: .78rem; font-weight: 700; margin-right: 6px; }
+.apply-btn {
+  margin-top: 16px; background: var(--orange); color: #fff; border: none;
+  border-radius: 8px; padding: 10px 20px; font-size: .88rem; font-weight: 700;
+  cursor: pointer; font-family: 'Nunito', sans-serif; transition: background .2s;
+}
+.apply-btn:hover { background: var(--orange-light); }
+
+/* ── CONTACT ── */
+#contact { background: var(--white); }
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+.contact-card {
+  background: var(--green-pale); border-radius: var(--radius); padding: 24px;
+  display: flex; gap: 16px; align-items: flex-start;
+}
+.contact-icon { font-size: 32px; flex-shrink: 0; }
+.contact-card h4 { font-weight: 700; margin-bottom: 6px; }
+.contact-card p { font-size: .88rem; color: var(--gray); line-height: 1.6; }
+.contact-card a { color: var(--green); font-weight: 600; text-decoration: none; }
+.map-frame { width: 100%; height: 260px; border: none; border-radius: var(--radius); margin-top: 28px; filter: saturate(.8); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--dark); color: rgba(255,255,255,.6);
+  padding: 28px 32px; display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px; font-size: .85rem;
+}
+footer strong { color: #fff; }
+.footer-links { display: flex; gap: 16px; }
+.footer-links a { color: rgba(255,255,255,.5); text-decoration: none; }
+.footer-links a:hover { color: #fff; }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  background: var(--dark); color: #fff; padding: 12px 24px; border-radius: 100px;
+  font-weight: 600; font-size: .9rem; z-index: 9999;
+  opacity: 0; transition: opacity .3s; pointer-events: none;
+  display: flex; align-items: center; gap: 8px;
+}
+.toast.show { opacity: 1; }
+
+@media(max-width:600px){
+  nav { padding: 0 14px; }
+  .nav-links a:not(.cart-btn) { display: none; }
+  .hero { padding: 40px 16px 36px; }
+  .hero-text h1 { font-size: 2rem; }
+  .hero-art { font-size: 70px; }
+  section { padding: 36px 16px; }
+  .upi-banner { padding: 12px 16px; }
+  footer { padding: 20px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">
+    <span class="nav-logo">🛒</span>
+    <span class="nav-name">Ravi General Store</span>
+  </a>
+  <div class="nav-links">
+    <a href="#products">Shop</a>
+    <a href="#how">How It Works</a>
+    <a href="#careers">Careers</a>
+    <a href="#contact">Contact</a>
+    <a href="#order" class="cart-btn">🛒 Cart <span class="cart-count" id="navCartCount">0</span></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-text">
+    <h1>Your Neighbourhood<br><span>Ravi General Store</span></h1>
+    <p>Groceries, confectionery, fruits & veggies, utensils and more — ordered online, packed fresh, ready for pickup!</p>
+    <div class="hero-badges">
+      <span class="badge">✅ Online Orders</span>
+      <span class="badge">📦 Self Pickup</span>
+      <span class="badge">💳 UPI Payment</span>
+      <span class="badge">🌿 Fresh Daily</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">🛍 Shop Now</a>
+      <a href="#how" class="btn-secondary">How It Works</a>
+    </div>
+  </div>
+  <div class="hero-art">🏪</div>
+</div>
+
+<!-- UPI BANNER -->
+<div class="upi-banner">
+  <p>💳 We accept UPI payments!</p>
+  <span class="upi-id">ravigeneralstore@upi</span>
+  <p>Pay before pickup • Google Pay • PhonePe • Paytm</p>
+</div>
+
+<!-- CATEGORIES -->
+<section id="categories">
+  <div class="section-header">
+    <span class="tag">Browse by Category</span>
+    <h2>What are you looking for?</h2>
+    <p>Click a category to filter products below</p>
+  </div>
+  <div class="cats-grid">
+    <a href="#products" class="cat-card" onclick="filterCategory('all')">
+      <span class="cat-icon">🛒</span>
+      <div class="cat-name">All Items</div>
+      <div class="cat-count">View All</div>
+    </a>
+    <a href="#products" class="cat-card" onclick="filterCategory('grocery')">
+      <span class="cat-icon">🌾</span>
+      <div class="cat-name">Grocery</div>
+      <div class="cat-count">Rice, Dal, Oil & more</div>
+    </a>
+    <a href="#products" class="cat-card" onclick="filterCategory('confectionery')">
+      <span class="cat-icon">🍬</span>
+      <div class="cat-name">Confectionery</div>
+      <div class="cat-count">Biscuits, Chocolates</div>
+    </a>
+    <a href="#products" class="cat-card" onclick="filterCategory('fruits')">
+      <span class="cat-icon">🍎</span>
+      <div class="cat-name">Fruits & Veggies</div>
+      <div class="cat-count">Fresh everyday</div>
+    </a>
+    <a href="#products" class="cat-card" onclick="filterCategory('utensils')">
+      <span class="cat-icon">🍳</span>
+      <div class="cat-name">Utensils</div>
+      <div class="cat-count">Cookware & more</div>
+    </a>
+    <a href="#products" class="cat-card" onclick="filterCategory('other')">
+      <span class="cat-icon">🧴</span>
+      <div class="cat-name">Others</div>
+      <div class="cat-count">Daily needs</div>
+    </a>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="section-header">
+    <span class="tag">Our Products</span>
+    <h2>Fresh & Ready to Order</h2>
+  </div>
+  <div class="filter-bar">
+    <div class="search-bar">
+      <span>🔍</span>
+      <input type="text" id="searchInput" placeholder="Search products…" oninput="renderProducts()">
+    </div>
+    <button class="filter-btn active" onclick="setFilter(this,'all')">All</button>
+    <button class="filter-btn" onclick="setFilter(this,'grocery')">🌾 Grocery</button>
+    <button class="filter-btn" onclick="setFilter(this,'confectionery')">🍬 Confectionery</button>
+    <button class="filter-btn" onclick="setFilter(this,'fruits')">🍎 Fruits & Veggies</button>
+    <button class="filter-btn" onclick="setFilter(this,'utensils')">🍳 Utensils</button>
+    <button class="filter-btn" onclick="setFilter(this,'other')">🧴 Others</button>
+  </div>
+  <div class="products-grid" id="productsGrid"></div>
+  <div class="no-results" id="noResults">No products found. Try a different search!</div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-header">
+    <span class="tag">Easy Process</span>
+    <h2>How to Order</h2>
+    <p>Order online, pay via UPI, and pick up from our store.</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div style="font-size:36px;margin-bottom:8px;">🛍</div>
+      <h3>Browse & Add</h3>
+      <p>Browse categories, add items to your cart</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div style="font-size:36px;margin-bottom:8px;">📋</div>
+      <h3>Place Order</h3>
+      <p>Fill your name, phone, and place the order</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div style="font-size:36px;margin-bottom:8px;">💳</div>
+      <h3>Pay via UPI</h3>
+      <p>Pay using <strong>ravigeneralstore@upi</strong> — Google Pay, PhonePe, Paytm</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div style="font-size:36px;margin-bottom:8px;">📦</div>
+      <h3>We Pack It</h3>
+      <p>Your order is carefully picked & packed</p>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div style="font-size:36px;margin-bottom:8px;">🏃</div>
+      <h3>Pickup Ready!</h3>
+      <p>Visit the store, show your order ID, take your order!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER SECTION -->
+<section id="order">
+  <div class="section-header">
+    <span class="tag">Place Order</span>
+    <h2>Complete Your Order</h2>
+    <p>Fill in your details and review your cart</p>
+  </div>
+  <div class="order-layout">
+    <div class="order-form-wrap">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" id="custName" placeholder="e.g. Ramesh Kumar">
+        </div>
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="tel" id="custPhone" placeholder="10-digit mobile number">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Pickup Time Preference</label>
+        <select id="pickupTime">
+          <option>Morning (8 AM – 12 PM)</option>
+          <option>Afternoon (12 PM – 4 PM)</option>
+          <option>Evening (4 PM – 8 PM)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Special Instructions (optional)</label>
+        <textarea id="custNote" rows="3" placeholder="Any specific brand, size, or note for the store…"></textarea>
+      </div>
+      <div class="upi-pay-box">
+        <p>Payment via UPI</p>
+        <div class="upi-big">ravigeneralstore@upi</div>
+        <p>Please pay after order confirmation. Show screenshot at pickup.</p>
+      </div>
+      <button class="place-order-btn" onclick="placeOrder()">✅ Confirm & Place Order</button>
+    </div>
+    <div class="cart-wrap">
+      <div class="cart-box">
+        <h3>🛒 Your Cart</h3>
+        <div class="cart-items" id="cartItems">
+          <div class="cart-empty">Your cart is empty.<br>Add items from the shop! 🛍</div>
+        </div>
+        <div class="cart-totals" id="cartTotals" style="display:none;">
+          <div class="cart-row"><span>Subtotal</span><span id="subtotalVal">₹0</span></div>
+          <div class="cart-row total"><span>Total</span><span id="totalVal">₹0</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREERS -->
+<section id="careers">
+  <div class="section-header">
+    <span class="tag" style="background:rgba(255,255,255,.1);color:#fff;">Join Us</span>
+    <h2>We're Hiring!</h2>
+    <p>Be part of Ravi General Store's growing team</p>
+  </div>
+  <div class="jobs-grid">
+    <div class="job-card">
+      <h3>Store Helper / Packer</h3>
+      <p>Assist in picking, packing and organising online orders. Friendly attitude required.</p>
+      <span class="job-tag">Part-time</span><span class="job-tag">Freshers OK</span>
+      <br><button class="apply-btn" onclick="applyJob('Store Helper / Packer')">Apply Now</button>
+    </div>
+    <div class="job-card">
+      <h3>Cashier / Billing</h3>
+      <p>Handle billing, UPI payments and manage daily cash register.</p>
+      <span class="job-tag">Full-time</span><span class="job-tag">Basic Math</span>
+      <br><button class="apply-btn" onclick="applyJob('Cashier / Billing')">Apply Now</button>
+    </div>
+    <div class="job-card">
+      <h3>Inventory Manager</h3>
+      <p>Track stock levels, handle vendor orders and maintain records for all categories.</p>
+      <span class="job-tag">Full-time</span><span class="job-tag">Experience+</span>
+      <br><button class="apply-btn" onclick="applyJob('Inventory Manager')">Apply Now</button>
+    </div>
+    <div class="job-card">
+      <h3>Fruits & Veggies Handler</h3>
+      <p>Sort, display and manage the fresh produce section. Early morning shift.</p>
+      <span class="job-tag">Part-time</span><span class="job-tag">Morning Shift</span>
+      <br><button class="apply-btn" onclick="applyJob('Fruits & Veggies Handler')">Apply Now</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <span class="tag">Find Us</span>
+    <h2>Visit or Contact Us</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <span class="contact-icon">📍</span>
+      <div>
+        <h4>Location</h4>
+        <p>Ravi General Store<br>Main Market Road, Burla<br>Sambalpur, Odisha – 768017</p>
+      </div>
+    </div>
+    <div class="contact-card">
+      <span class="contact-icon">⏰</span>
+      <div>
+        <h4>Store Hours</h4>
+        <p>Monday – Saturday: 8 AM – 8 PM<br>Sunday: 9 AM – 6 PM<br>All Major Festivals: Closed</p>
+      </div>
+    </div>
+    <div class="contact-card">
+      <span class="contact-icon">📞</span>
+      <div>
+        <h4>Phone & UPI</h4>
+        <p><a href="tel:+919876543210">+91 98765 43210</a><br>
+        UPI: <strong>ravigeneralstore@upi</strong></p>
+      </div>
+    </div>
+    <div class="contact-card">
+      <span class="contact-icon">💬</span>
+      <div>
+        <h4>WhatsApp Orders</h4>
+        <p>Send your list on WhatsApp for faster ordering. We confirm within 15 minutes.<br>
+        <a href="https://wa.me/919876543210">Chat on WhatsApp →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>© 2026 <strong>Ravi General Store</strong> · Burla, Odisha</div>
+  <div class="footer-links">
+    <a href="#products">Shop</a>
+    <a href="#how">How It Works</a>
+    <a href="#order">Order</a>
+    <a href="#careers">Careers</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div>UPI: <strong>ravigeneralstore@upi</strong></div>
+</footer>
+
+<!-- ORDER SUCCESS MODAL -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal">
+    <div class="modal-icon">🎉</div>
+    <h2>Order Placed!</h2>
+    <div class="order-id" id="modalOrderId">Order #RGS0001</div>
+    <p id="modalMsg">Your order is being packed. Please pay via UPI <strong>ravigeneralstore@upi</strong> and bring the screenshot when you pick up your order.</p>
+    <button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeModal()">Got it! 👍</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✅ Item added to cart</div>
+
+<script>
+// ── PRODUCT DATA ──
+const PRODUCTS = [
+  // Grocery
+  { id:1, name:'Basmati Rice', unit:'5 kg bag', price:380, cat:'grocery', icon:'🌾' },
+  { id:2, name:'Toor Dal', unit:'1 kg', price:145, cat:'grocery', icon:'🫘' },
+  { id:3, name:'Mustard Oil', unit:'1 litre', price:185, cat:'grocery', icon:'🫙' },
+  { id:4, name:'Sugar', unit:'1 kg', price:48, cat:'grocery', icon:'🍚' },
+  { id:5, name:'Wheat Flour (Atta)', unit:'5 kg', price:220, cat:'grocery', icon:'🌾' },
+  { id:6, name:'Salt', unit:'1 kg', price:20, cat:'grocery', icon:'🧂' },
+  { id:7, name:'Chana Dal', unit:'1 kg', price:110, cat:'grocery', icon:'🫘' },
+  { id:8, name:'Turmeric Powder', unit:'200 g', price:45, cat:'grocery', icon:'🟡' },
+  // Confectionery
+  { id:9, name:'Parle-G Biscuits', unit:'800 g pack', price:55, cat:'confectionery', icon:'🍪' },
+  { id:10, name:'Dairy Milk Chocolate', unit:'40 g bar', price:30, cat:'confectionery', icon:'🍫' },
+  { id:11, name:'Kurkure', unit:'60 g pack', price:20, cat:'confectionery', icon:'🍟' },
+  { id:12, name:'Bourbon Biscuits', unit:'100 g', price:25, cat:'confectionery', icon:'🍪' },
+  { id:13, name:'Toffee Mix', unit:'50 pieces', price:50, cat:'confectionery', icon:'🍬' },
+  { id:14, name:'Choco Pie', unit:'6 pcs box', price:60, cat:'confectionery', icon:'🧁' },
+  // Fruits & Veggies
+  { id:15, name:'Tomatoes', unit:'1 kg', price:35, cat:'fruits', icon:'🍅' },
+  { id:16, name:'Onions', unit:'1 kg', price:40, cat:'fruits', icon:'🧅' },
+  { id:17, name:'Potatoes', unit:'1 kg', price:30, cat:'fruits', icon:'🥔' },
+  { id:18, name:'Bananas', unit:'1 dozen', price:45, cat:'fruits', icon:'🍌' },
+  { id:19, name:'Apples (Shimla)', unit:'1 kg', price:120, cat:'fruits', icon:'🍎' },
+  { id:20, name:'Spinach', unit:'1 bunch', price:20, cat:'fruits', icon:'🥬' },
+  // Utensils
+  { id:21, name:'Steel Tiffin Box', unit:'3 tier', price:320, cat:'utensils', icon:'🥡' },
+  { id:22, name:'Non-stick Tawa', unit:'28 cm', price:450, cat:'utensils', icon:'🍳' },
+  { id:23, name:'Steel Kadai', unit:'Medium', price:380, cat:'utensils', icon:'🫕' },
+  { id:24, name:'Pressure Cooker', unit:'3 litre', price:1200, cat:'utensils', icon:'🫙' },
+  // Others
+  { id:25, name:'Surf Excel Detergent', unit:'1 kg', price:145, cat:'other', icon:'🧺' },
+  { id:26, name:'Colgate Toothpaste', unit:'150 g', price:85, cat:'other', icon:'🪥' },
+  { id:27, name:'Lifebuoy Soap', unit:'3 bars', price:68, cat:'other', icon:'🧼' },
+  { id:28, name:'Dettol Handwash', unit:'200 ml', price:95, cat:'other', icon:'🫧' },
+];
+
+let cart = {}; // { productId: qty }
+let currentFilter = 'all';
+
+function setFilter(btn, cat) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderProducts();
+}
+function filterCategory(cat) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim().toLowerCase().includes(cat) || cat === 'all' && b.textContent.trim() === 'All');
+  });
+  renderProducts();
+}
+
+function renderProducts() {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const grid = document.getElementById('productsGrid');
+  const noRes = document.getElementById('noResults');
+  let items = PRODUCTS.filter(p => {
+    const matchCat = currentFilter === 'all' || p.cat === currentFilter;
+    const matchSearch = p.name.toLowerCase().includes(search) || p.unit.toLowerCase().includes(search);
+    return matchCat && matchSearch;
+  });
+  if (items.length === 0) {
+    grid.innerHTML = '';
+    noRes.style.display = 'block';
+    return;
+  }
+  noRes.style.display = 'none';
+  grid.innerHTML = items.map(p => {
+    const qty = cart[p.id] || 0;
+    return `<div class="product-card" id="pcard-${p.id}">
+      <div class="product-img">${p.icon}</div>
+      <div class="product-body">
+        <div class="product-name">${p.name}</div>
+        <div class="product-unit">${p.unit}</div>
+        <div class="product-footer">
+          <div class="product-price">₹${p.price}</div>
+          ${qty === 0
+            ? `<button class="add-btn" onclick="addToCart(${p.id})">+ Add</button>`
+            : `<div class="qty-ctrl">
+                <button class="qty-minus" onclick="changeQty(${p.id},-1)">−</button>
+                <span class="qty-num">${qty}</span>
+                <button class="qty-plus" onclick="changeQty(${p.id},1)">+</button>
+               </div>`
+          }
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function addToCart(id) {
+  cart[id] = 1;
+  renderProducts();
+  updateCart();
+  showToast('✅ Added to cart!');
+}
+function changeQty(id, delta) {
+  cart[id] = (cart[id] || 0) + delta;
+  if (cart[id] <= 0) delete cart[id];
+  renderProducts();
+  updateCart();
+}
+
+function updateCart() {
+  const ids = Object.keys(cart);
+  const cartEl = document.getElementById('cartItems');
+  const totalsEl = document.getElementById('cartTotals');
+  const navCount = document.getElementById('navCartCount');
+  const totalQty = ids.reduce((s, id) => s + cart[id], 0);
+  navCount.textContent = totalQty;
+  if (ids.length === 0) {
+    cartEl.innerHTML = '<div class="cart-empty">Your cart is empty.<br>Add items from the shop! 🛍</div>';
+    totalsEl.style.display = 'none';
+    return;
+  }
+  let subtotal = 0;
+  cartEl.innerHTML = ids.map(id => {
+    const p = PRODUCTS.find(x => x.id == id);
+    const lineTotal = p.price * cart[id];
+    subtotal += lineTotal;
+    return `<div class="cart-item">
+      <span class="cart-item-name">${p.icon} ${p.name}</span>
+      <span class="cart-item-qty">×${cart[id]}</span>
+      <span class="cart-item-price">₹${lineTotal}</span>
+      <button class="cart-rm" onclick="removeCartItem(${id})" title="Remove">✕</button>
+    </div>`;
+  }).join('');
+  document.getElementById('subtotalVal').textContent = '₹' + subtotal;
+  document.getElementById('totalVal').textContent = '₹' + subtotal;
+  totalsEl.style.display = 'block';
+}
+
+function removeCartItem(id) {
+  delete cart[id];
+  renderProducts();
+  updateCart();
+}
+
+let orderNum = 1000;
+function placeOrder() {
+  const name = document.getElementById('custName').value.trim();
+  const phone = document.getElementById('custPhone').value.trim();
+  if (Object.keys(cart).length === 0) { showToast('🛒 Cart is empty!'); return; }
+  if (!name) { showToast('⚠️ Please enter your name'); return; }
+  if (!/^[0-9]{10}$/.test(phone)) { showToast('⚠️ Enter a valid 10-digit phone number'); return; }
+  orderNum++;
+  const oid = 'RGS' + orderNum;
+  document.getElementById('modalOrderId').textContent = 'Order #' + oid;
+  document.getElementById('modalMsg').innerHTML = `Hi <strong>${name}</strong>! Your order is being packed. Please pay via UPI <strong>ravigeneralstore@upi</strong> and show the screenshot to the store owner when you pick up. Call <strong>+91 98765 43210</strong> for any query.`;
+  document.getElementById('successModal').classList.add('open');
+  cart = {};
+  renderProducts();
+  updateCart();
+  document.getElementById('custName').value = '';
+  document.getElementById('custPhone').value = '';
+  document.getElementById('custNote').value = '';
+}
+function closeModal() { document.getElementById('successModal').classList.remove('open'); }
+
+function applyJob(role) {
+  showToast(`📩 Application for "${role}" sent! We'll contact you soon.`);
+}
+
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
+}
+
+// Init
+renderProducts();
+updateCart();
+</script>
+</body>
+</html>
